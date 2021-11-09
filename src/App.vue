@@ -27,20 +27,19 @@ export default {
     input7:'',
     input8:'',
     input9:'',
-    input10:1.5,
-    input11:60
+    second:1.5,
+    minutes:60
     }
-
   },
   computed:{
     multi1() {
-      return (this.input1 * this.input11 + this.input2) / this.input10 * this.input3
+      return (this.input1 * this.minutes + this.input2) / this.second * this.input3
     },
     multi2() {
-      return (this.input4 * this.input11 + this.input5) / this.input10 * this.input6
+      return (this.input4 * this.minutes + this.input5) / this.second * this.input6
     },
     multi3() {
-      return (this.input7 * this.input11 + this.input8) / this.input10 * this.input9
+      return (this.input7 * this.minutes + this.input8) / this.second * this.input9
     },
     multi4() {
       return Math.round(this.multi1 + this.multi2 + this.multi3) 
