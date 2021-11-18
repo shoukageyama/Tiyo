@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <p>傾国 計算ツール</p>
+    <p>傾国 計算ツール（仮）</p>
   </div>
 </template>
 
@@ -15,18 +15,9 @@ export default {
 </script>
 
 <style>
-html,body {
-  width: 3500px;
-  height: 100vh;
-}
-body {
-  background-image: url(../assets/image/img/IMG_1858.png);
-  background-size: cover;
-}
 p {
   position: absolute;
   top: 50%;
   left: 50%;
-  color: antiquewhite;
 }
 </style>

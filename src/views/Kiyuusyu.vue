@@ -1,5 +1,9 @@
 <template>
   <div id="kiyuusyu">
+    <div class="result">
+        {{ totalhuman }}部隊
+        <button class="resetbtn" @click="resethuman()">リセット</button>
+    </div>
     <!-- 表示画像 -->
     <!-- ここからsvg -->
     <div class="imagebox">
@@ -107,7 +111,6 @@
       <img id="bg_img" src="@/assets/image/img/kiyuusyu.jpeg" alt="keizyou">
     </div>
     <!-- ここまで画像 -->
-    <div class="result">{{ totalhuman }}部隊</div>
     <modal name="hello-world" :draggable="false" :resizable="true" :clickToClose="false" :adaptive="true" >
       <div class="modal-heder">{{ num.name }}</div>
       <div class="modal-body">
@@ -178,26 +181,28 @@ export default {
     hide() {
       this.num.human = this.multi
       this.$modal.hide('hello-world');
-  },
-}
+    },
+    resethuman() {
+      this.kiyuusyuData.forEach(element => {
+        element.human = 0
+      });
+    }
+  } 
 }
 </script>
 
 <style>
+
 .imagebox {
   width: 100vw;
   height: 100vh;
   position: relative;
-  /* position: absolute;
-  width: auto;
-  height: 100%;
-  margin: 0 auto; */
 }
 #kz {
   width: auto;
   min-height: 100%;
   position: relative;
-  z-index: 10;
+  z-index: 100;
   mix-blend-mode: overlay; 
 }
 #bg_img {
@@ -206,6 +211,13 @@ export default {
   position: absolute;
   top: 0;
   left: 0;
+}
+.result {
+  position: absolute;
+  text-align: center;
+  width: auto;
+  top: 0;
+  left: 50%;
 }
 .modal-heder {
   width: 100%;
@@ -230,13 +242,9 @@ input {
 .btn {
   border: outset;
 }
-.result {
-  position: absolute;
-  background-color: black;
-  text-align: center;
-  color: aliceblue;
-  top: 24px;
-  width: 1887px;
-  height: 35px;
+.resetbtn {
+  border: outset;
+  z-index: 100;
 }
+
 </style>

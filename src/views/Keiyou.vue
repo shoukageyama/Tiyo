@@ -1,9 +1,13 @@
 <template>
   <div id="keiyou">
+      <div class="result">
+        {{ totalhuman }}部隊
+        <button class="resetbtn" @click="resethuman()">リセット</button>
+      </div>
     <!-- 表示画像 -->
     <!-- ここからsvg -->
     <div class="imagebox">
-      <svg id="kz" width="1320" height="420" viewBox="0 0 1320 420" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <svg id="kz" viewBox="0 0 1320 420" fill="none" xmlns="http://www.w3.org/2000/svg">
         <g id="Frame 1">
         <g id="kousi">
         <path @click="show(0)" d="M89.2222 401.972C91.0694 402.308 93.2945 402.11 95.2698 402.029C97.7297 402.648 101.583 402 103.75 402C106.695 402 109.603 403 112.75 403C115.334 403 119.579 401.709 121 399.222C122.123 397.258 121.211 391.839 119.25 390.75C117.724 389.902 116.5 388.836 116.5 387C116.5 385.18 118.181 385.774 119 384.75C119.553 384.059 120.567 383.753 121.25 383.222C122.071 382.583 122.062 381.721 122.611 381.111C124.03 379.535 123 379.058 123 377.25C123 374.824 119.658 371.595 118.222 369.75C116.466 367.492 114.139 365.881 111.722 364.5C111.09 364.139 107.737 361.842 108.111 361C108.794 359.464 109.888 358.341 110.75 357C111.931 355.163 118.027 356.5 120.25 356.5C121.682 356.5 123.285 357.5 124.889 357.5C126.91 357.5 128.682 357 130.75 357C134.105 357 138 356.587 138 352.75V342.75C138 341.346 138.52 338.5 136.5 338.5C134.229 338.5 131.99 338 129.778 338C123.241 338 116.884 338.5 110.278 338.5C106.761 338.5 103.433 338 100 338C95.7037 338 91.3573 336.5 87 336.5C83.7666 336.5 80.4228 336.41 77.5 335.111C75.9388 334.417 74.3759 335.5 73 335.5H68C66.5508 335.5 57.4932 334.501 56.6111 336C55.0996 338.569 55.5 342.558 55.5 345.5C55.5 348.791 55.3235 351.323 55.5 354.5C55.6689 357.54 62.467 356.5 64.5 356.5C67.515 356.5 70.8169 357.313 74 357.5C75.3945 357.582 73.1176 364.915 72.6111 365.611C71.7138 366.845 73.0327 369.341 72.25 370.75C71.6167 371.89 70.5726 374.192 70.5 375.5C70.3874 377.527 70.2641 383.178 73 383.5C77.9487 384.082 74.1288 388.425 72.6111 390.111C71.5622 391.277 70.5597 393.084 71.0278 394.722L71.0405 394.767C71.2607 395.538 71.8932 397.754 72.5 398.111C75.7274 400.01 78.7003 401 82.6111 401C85.1094 401 86.8511 401.541 89.2222 401.972Z" fill="rgb(196,196,196,0.1)"/>
@@ -103,7 +107,7 @@
       <img id="bg_img" src="@/assets/image/img/keiyou1.jpeg" alt="keizyou">
     </div>
     <!-- ここまで画像 -->
-    <div class="result">{{ totalhuman }}部隊</div>
+
     <modal name="hello-world" :draggable="false" :resizable="true" :clickToClose="false" :adaptive="true" >
       <div class="modal-heder">{{ num.name }}</div>
       <div class="modal-body">
@@ -163,7 +167,7 @@ export default {
         total += this.keiyouData[i].human
       }
       return Math.round(total) 
-    }
+    },
   },
   methods: {
     show(nu) {
@@ -173,12 +177,18 @@ export default {
     hide() {
       this.num.human = this.multi
       this.$modal.hide('hello-world');
-  },
-}
+    },
+    resethuman() {
+      this.keiyouData.forEach(element => {
+        element.human = 0
+      });
+    }
+  }
 }
 </script>
 
 <style>
+
 .imagebox {
   width: 100vw;
   height: 100vh;
@@ -197,6 +207,13 @@ export default {
   position: absolute;
   top: 0;
   left: 0;
+}
+.result {
+  position: absolute;
+  text-align: center;
+  width: auto;
+  top: 0;
+  left: 50%;
 }
 .modal-heder {
   width: 100%;
@@ -221,14 +238,9 @@ input {
 .btn {
   border: outset;
 }
-.result {
-  position: absolute;
-  background-color: black;
-  text-align: center;
-  color: aliceblue;
-  top: 24px;
-  max-width: 4000px;
-  width: 3500px;
-  height: 25px;
+.resetbtn {
+  border: outset;
+  z-index: 100;
 }
+
 </style>

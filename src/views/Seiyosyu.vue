@@ -1,5 +1,9 @@
 <template>
   <div id="seiyosyu">
+    <div class="result">
+      {{ totalhuman }}部隊
+      <button class="resetbtn" @click="resethuman()">リセット</button>
+    </div>
     <!-- 表示画像 -->
     <!-- ここからsvg -->
     <div class="imagebox">
@@ -88,7 +92,6 @@
       <img id="bg_img" src="@/assets/image/img/seiyosyu.jpeg" alt="">
     </div>
     <!-- ここまで画像 -->
-    <div class="result">{{ totalhuman }}部隊</div>
     <modal name="hello-world" :draggable="false" :resizable="true" :clickToClose="false" :adaptive="true" >
       <div class="modal-heder">{{ num.name }}</div>
       <div class="modal-body">
@@ -110,7 +113,7 @@ export default {
     second:1.5,
     minutes:60,
     num: '',
-    SeiyosyoData: [
+    seiyosyoData: [
       { id: 1, name:"蓬莱", human:0},
       { id: 2, name:"琅ヤ", human:0},
       { id: 3, name:"下ヒ", human:0},
@@ -139,35 +142,37 @@ export default {
     },
     totalhuman() {
       let total = 0
-      const length = this.SeiyosyoData.length
+      const length = this.seiyosyoData.length
       for(let i = 0; i < length; i++) {
-        total += this.SeiyosyoData[i].human
+        total += this.seiyosyoData[i].human
       }
       return Math.round(total) 
     }
   },
   methods: {
     show(nu) {
-      this.num = this.SeiyosyoData[nu]
+      this.num = this.seiyosyoData[nu]
       this.$modal.show('hello-world');
     },
     hide() {
       this.num.human = this.multi
       this.$modal.hide('hello-world');
-  },
-}
+    },
+    resethuman() {
+      this.seiyosyoData.forEach(element => {
+        element.human = 0
+      });
+    }
+  }
 }
 </script>
 
 <style>
+
 .imagebox {
   width: 100vw;
   height: 100vh;
   position: relative;
-  /* position: absolute;
-  width: auto;
-  height: 100%;
-  margin: 0 auto; */
 }
 #kz {
   width: auto;
@@ -182,6 +187,13 @@ export default {
   position: absolute;
   top: 0;
   left: 0;
+}
+.result {
+  position: absolute;
+  text-align: center;
+  width: auto;
+  top: 0;
+  left: 50%;
 }
 .modal-heder {
   width: 100%;
@@ -206,14 +218,9 @@ input {
 .btn {
   border: outset;
 }
-.result {
-  position: absolute;
-  background-color: black;
-  text-align: center;
-  color: aliceblue;
-  top: 24px;
-  max-width: 300px;
-  width: 100%;
-  height: 20px;
+.resetbtn {
+  border: outset;
+  z-index: 100;
 }
+
 </style>
