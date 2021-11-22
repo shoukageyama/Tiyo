@@ -81,7 +81,7 @@
       <img id="bg_img" src="@/assets/image/img/outon.jpeg" alt="Outonimg">
     </div>
     <!-- ここまで画像 -->
-    <modal name="hello-world" :draggable="false" :resizable="true" :clickToClose="false" :adaptive="true" >
+    <modal name="hello-world" :draggable="false" :resizable="true" :clickToClose="false" :adaptive="true" :pivotX=0.1 :pivotY=0.1>
       <div class="modal-heder">{{ num.name }}</div>
       <div class="modal-body">
         <input type="text" v-model.number="input1">分<input type="text" v-model.number="input2">秒 駐屯数:<input type="text" v-model.number="input3">
@@ -183,6 +183,11 @@ export default {
   top: 0;
   left: 50%;
 }
+.resetbtn {
+  border: outset;
+  z-index: 100;
+}
+
 .modal-heder {
   width: 100%;
   top: 50%;
@@ -205,10 +210,6 @@ input {
 }
 .btn {
   border: outset;
-}
-.resetbtn {
-  border: outset;
-  z-index: 100;
 }
 
 </style>
