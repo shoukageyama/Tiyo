@@ -14,7 +14,7 @@
 
 <style>
 #nav {
-  width: 602px;
+  width: auto;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;

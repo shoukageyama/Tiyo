@@ -207,7 +207,7 @@ export default {
   position: absolute;
   text-align: center;
   width: auto;
-  top: 3%;
+  top: 6%;
   left: 55%;
   z-index: 10000;
   background-color: aliceblue;
