@@ -241,7 +241,7 @@ input {
 .sm {
   background-image: url(../assets/image/img/IMG_1858.png);
   background-size: cover;
-  width: 600px;
+  width: 100vw;
   height: auto;
   position: absolute;
   color: aliceblue;
@@ -259,12 +259,12 @@ input {
   justify-content: space-between;
   align-items: center;
 }
-@media (max-width: 600px) {
+@media (max-width: 500px) {
   .imagebox {
     display: none;
   }
 }
-@media (min-width: 601px) and (max-width: 9999px) {
+@media (min-width: 501px) and (max-width: 9999px) {
   .sm {
     display: none;
   }

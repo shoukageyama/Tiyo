@@ -13,9 +13,10 @@ export default {
   data() {
     return{
       images: [
-        require("@/assets/image/img/yoshitune.jpeg"),
-        require("@/assets/image/img/hakuki.jpeg"),
-        require("@/assets/image/img/motonari.jpeg"),
+        require("@/assets/image/img/charaimg/yoshitune.jpeg"),
+        require("@/assets/image/img/charaimg/hakuki.jpeg"),
+        require("@/assets/image/img/charaimg/motonari.jpeg"),
+        require("@/assets/image/img/charaimg/oukizin.jpeg")
       ],
       selectedImage: '',
     }
