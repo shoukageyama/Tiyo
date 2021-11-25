@@ -253,7 +253,7 @@ input {
 .sm {
   background-image: url(../assets/image/img/IMG_1858.png);
   background-size: cover;
-  width: 400px;
+  width: 600px;
   height: auto;
   position: absolute;
   color: aliceblue;
