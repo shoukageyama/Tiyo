@@ -1,12 +1,13 @@
 <template>
   <div id="ryoueki">
     <div class="result">
-      {{ totalhuman }}部隊
+      {{ totalhuman }}個
       <button class="resetbtn" @click="resethuman()">リセット</button>
     </div>
     <!-- 表示画像 -->
     <!-- ここからsvg -->
     <div class="imagebox">
+      <img id="bg_img" src="@/assets/image/img/ryoueki1.jpeg" alt="ryoueki">
       <svg id="kz" width="826" height="1714" viewBox="0 0 826 1714" fill="none" xmlns="http://www.w3.org/2000/svg">
       <g id="Frame 1">
       <g id="bui">
@@ -99,13 +100,41 @@
       </g>
       </g>
       </svg>
-
 <!-- ここまでsvg -->
-      <img id="bg_img" src="@/assets/image/img/ryoueki1.jpeg" alt="ryoueki">
+    </div>
+        <div class="sm">
+      <div class="gold">
+        <li>長安<br><img @click="show(5)" src="../assets/image/img/ryoueki/gold/tyouan.jpeg" alt=""></li>
+      </div>
+      <div class="blue">
+        <li>陳倉<br><img @click="show(4)" src="../assets/image/img/ryoueki/blue/tinsou.jpeg" alt=""></li>
+        <li>剣閣<br><img @click="show(11)" src="../assets/image/img/ryoueki/blue/kenkaku.jpeg" alt=""></li>
+        <li>フ陵<br><img @click="show(13)" src="../assets/image/img/ryoueki/blue/huryou.jpeg" alt=""></li>
+        <li>成都<br><img @click="show(15)" src="../assets/image/img/ryoueki/blue/seito.jpeg" alt=""></li>
+      </div>
+      <div class="red">
+        <li>武威<br><img @click="show(0)" src="../assets/image/img/ryoueki/red/bui.jpeg" alt=""></li>
+        <li>五丈原<br><img @click="show(1)" src="../assets/image/img/ryoueki/red/gozyougen.jpeg" alt=""></li>
+        <li>扶風<br><img @click="show(2)" src="../assets/image/img/ryoueki/red/huhuu.jpeg" alt=""></li>
+        <li>安定<br><img @click="show(3)" src="../assets/image/img/ryoueki/red/antei.jpeg" alt=""></li>
+        <li>西平<br><img @click="show(6)" src="../assets/image/img/ryoueki/red/seihei.jpeg" alt=""></li>
+        <li>街亭<br><img @click="show(7)" src="../assets/image/img/ryoueki/red/gaitei.jpeg" alt=""></li>
+        <li>天水<br><img @click="show(8)" src="../assets/image/img/ryoueki/red/tensui.jpeg" alt=""></li>
+        <li>武都<br><img @click="show(9)" src="../assets/image/img/ryoueki/red/buto.jpeg" alt=""></li>
+        <li>岐山<br><img @click="show(10)" src="../assets/image/img/ryoueki/red/kizan.jpeg" alt=""></li>
+        <li>綿竹関<br><img @click="show(12)" src="../assets/image/img/ryoueki/red/mentikukan.jpeg" alt=""></li>
+        <li>梓潼<br><img @click="show(14)" src="../assets/image/img/ryoueki/red/sitou.jpeg" alt=""></li>
+        <li>漢嘉<br><img @click="show(16)" src="../assets/image/img/ryoueki/red/kanka.jpeg" alt=""></li>
+        <li>建寧<br><img @click="show(17)" src="../assets/image/img/ryoueki/red/kennei.jpeg" alt=""></li>
+        <li>江州<br><img @click="show(18)" src="../assets/image/img/ryoueki/red/koushuu.jpeg" alt=""></li>
+        <li>興古<br><img @click="show(19)" src="../assets/image/img/ryoueki/red/kouko.jpeg" alt=""></li>
+        <li>永昌<br><img @click="show(20)" src="../assets/image/img/ryoueki/red/eishou.jpeg" alt=""></li>
+        <li>雲南<br><img @click="show(21)" src="../assets/image/img/ryoueki/red/unnan.jpeg" alt=""></li>
+      </div>
     </div>
     <!-- ここまで画像 -->
     <modal name="hello-world" :draggable="false" :resizable="true" :clickToClose="false" :adaptive="true" :pivotX=0.1 :pivotY=0.1>
-      <div class="modal-heder">{{ num.name }}</div>
+      <div class="modal-heder">{{ num.name }}| {{ num.human }}個</div>
       <div class="modal-body">
         <input type="text" v-model.number="input1">分<input type="text" v-model.number="input2">秒 駐屯数:<input type="text" v-model.number="input3">
         <button class="btn" @click="hide()">駐屯</button>
@@ -153,7 +182,7 @@ export default {
   },
   computed:{
     multi() {
-      return (this.input1 * this.minutes + this.input2) / this.second * this.input3
+      return (Math.round(Math.round((this.input1 * this.minutes + this.input2) / this.second * this.input3) / 2) * 2)
     },
     totalhuman() {
       let total = 0
@@ -185,6 +214,7 @@ export default {
 <style>
 
 .imagebox {
+  /* display: none; */
   width: 100vw;
   height: 100vh;
   position: relative;
@@ -192,29 +222,27 @@ export default {
 #kz {
   width: auto;
   min-height: 100%;
-  position: relative;
+  position: absolute;
   z-index: 100;
-  mix-blend-mode: overlay; 
+  top: 0;
+  left: 0;
 }
 #bg_img {
   width: auto;
   min-height: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
+  position: relative;
+  z-index: 1;
 }
 .result {
-  position: absolute;
+  /* position: absolute; */
   text-align: center;
   width: auto;
-  top: 6%;
-  left: 55%;
   z-index: 10000;
   background-color: aliceblue;
 }
 .resetbtn {
   border: outset;
-  z-index: 100;
+  z-index: 1000;
 }
 .modal-heder {
   width: 100%;
@@ -239,6 +267,38 @@ input {
 .btn {
   border: outset;
 }
-
-
+.sm {
+  background-image: url(../assets/image/img/IMG_1858.png);
+  background-size: cover;
+  width: 400px;
+  height: auto;
+  position: absolute;
+  color: aliceblue;
+  mix-blend-mode: overlay;
+}
+.blue {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+}
+.red {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+}
+@media (max-width: 600px) {
+  .imagebox {
+    display: none;
+  }
+}
+@media (min-width: 601px) and (max-width: 9999px) {
+  .sm {
+    display: none;
+  }
+  .result {
+      left: 50%;
+  }
+}
 </style>

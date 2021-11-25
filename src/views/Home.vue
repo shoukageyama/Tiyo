@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <p>傾国 計算ツール(仮)</p>
+    <p class="ta">傾国 計算ツール(仮)</p>
     <img class="bg_img" :src="selectedImage" >
   </div>
 </template>
@@ -28,7 +28,7 @@ export default {
 </script>
 
 <style>
-p {
+.ta {
   width: auto;
   position: absolute;
   top: 10%;

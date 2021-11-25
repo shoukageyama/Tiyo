@@ -1,12 +1,13 @@
 <template>
   <div id="keiyou">
       <div class="result">
-        {{ totalhuman }}部隊
+        {{ totalhuman }} 個
         <button class="resetbtn" @click="resethuman()">リセット</button>
       </div>
     <!-- 表示画像 -->
     <!-- ここからsvg -->
     <div class="imagebox">
+      <img id="bg_img" src="@/assets/image/img/keiyou1.jpeg" alt="keizyou">
       <svg id="kz" width="1320" height="420" viewBox="0 0 1320 420" fill="none" xmlns="http://www.w3.org/2000/svg">
         <g id="Frame 1">
         <g id="kousi">
@@ -104,11 +105,42 @@
         </g>
       </svg>
 <!-- ここまでsvg -->
-      <img id="bg_img" src="@/assets/image/img/keiyou1.jpeg" alt="keizyou">
+    
+    </div>
+    <div class="sm">
+      <div class="gold">
+      <li>襄陽<br><img @click="show(7)" src="../assets/image/img/keiyou/gold/zyouyou.jpeg" alt=""></li>
+      </div>
+      <div class="blue">
+      <li>江陵<br><img @click="show(6)" src="../assets/image/img/keiyou/blue/kouryou.jpeg" alt=""></li>
+      <li>長沙<br><img @click="show(10)" src="../assets/image/img/keiyou/blue/tyousa.jpeg" alt=""></li>
+      <li>江夏<br><img @click="show(13)" src="../assets/image/img/keiyou/blue/kouka.jpeg" alt=""></li>
+      <li>建業<br><img @click="show(15)" src="../assets/image/img/keiyou/blue/kengyou.jpeg" alt=""></li>
+      <li>建安<br><img @click="show(18)" src="../assets/image/img/keiyou/blue/kenan.jpeg" alt=""></li>
+      </div>
+      <div class="red">
+      <li>交趾<br><img @click="show(0)" src="../assets/image/img/keiyou/red/koushi.jpeg" alt=""></li>
+      <li>夷陵<br><img @click="show(1)" src="../assets/image/img/keiyou/red/iryou.jpeg" alt=""></li>
+      <li>永安<br><img @click="show(2)" src="../assets/image/img/keiyou/red/eian.jpeg" alt=""></li>
+      <li>麦城<br><img @click="show(3)" src="../assets/image/img/keiyou/red/bakuzyou.jpeg" alt=""></li>
+      <li>武陵<br><img @click="show(4)" src="../assets/image/img/keiyou/red/buryou.jpeg" alt=""></li>
+      <li>零陵<br><img @click="show(5)" src="../assets/image/img/keiyou/red/reiryou.jpeg" alt=""></li>
+      <li>桂陽<br><img @click="show(8)" src="../assets/image/img/keiyou/red/keiyou.jpeg" alt=""></li>
+      <li>衡陽<br><img @click="show(9)" src="../assets/image/img/keiyou/red/youshou.jpeg" alt=""></li>
+      <li>新野<br><img @click="show(11)" src="../assets/image/img/keiyou/red/shinya.jpeg" alt=""></li>
+      <li>華容<br><img @click="show(12)" src="../assets/image/img/keiyou/red/kayou.jpeg" alt=""></li>
+      <li>豫章<br><img @click="show(14)" src="../assets/image/img/keiyou/red/youshou.jpeg" alt=""></li>
+      <li>紫桑<br><img @click="show(16)" src="../assets/image/img/keiyou/red/saisou.jpeg" alt=""></li>
+      <li>蒼梧<br><img @click="show(17)" src="../assets/image/img/keiyou/red/sougo.jpeg" alt=""></li>
+      <li>曲阿<br><img @click="show(19)" src="../assets/image/img/keiyou/red/kyokua.jpeg" alt=""></li>
+      <li>呉郡<br><img @click="show(20)" src="../assets/image/img/keiyou/red/gogun.jpeg" alt=""></li>
+      <li>会稽<br><img @click="show(21)" src="../assets/image/img/keiyou/red/kaikei.jpeg" alt=""></li>
+      <li>臨海<br><img @click="show(22)" src="../assets/image/img/keiyou/red/rinkai.jpeg" alt=""></li>
+      </div> 
     </div>
     <!-- ここまで画像 -->
     <modal name="hello-world" :draggable="false" :resizable="true" :clickToClose="false" :adaptive="true">
-      <div class="modal-heder">{{ num.name }}</div>
+      <div class="modal-heder">{{ num.name }}| {{ num.human }}個</div>
       <div class="modal-body">
         <input type="text" v-model.number="input1">分<input type="text" v-model.number="input2">秒 駐屯数:<input type="text" v-model.number="input3">
         <button class="btn" @click="hide()">駐屯</button>
@@ -157,7 +189,7 @@ export default {
   },
   computed:{
     multi() {
-      return (this.input1 * this.minutes + this.input2) / this.second * this.input3
+      return (Math.round(Math.round((this.input1 * this.minutes + this.input2) / this.second * this.input3) / 2) * 2)
     },
     totalhuman() {
       let total = 0
@@ -189,6 +221,7 @@ export default {
 <style>
 
 .imagebox {
+  /* display: none; */
   width: 100vw;
   height: 100vh;
   position: relative;
@@ -196,23 +229,21 @@ export default {
 #kz {
   width: auto;
   min-height: 100%;
-  position: relative;
+  position: absolute;
   z-index: 100;
-  mix-blend-mode: overlay; 
+  top: 0;
+  left: 0;
 }
 #bg_img {
   width: auto;
   min-height: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
+  position: relative;
+  z-index: 1;
 }
 .result {
-  position: absolute;
+  /* position: absolute; */
   text-align: center;
   width: auto;
-  top: 6%;
-  left: 55%;
   z-index: 10000;
   background-color: aliceblue;
 }
@@ -243,5 +274,38 @@ input {
 .btn {
   border: outset;
 }
-
+.sm {
+  background-image: url(../assets/image/img/IMG_1858.png);
+  background-size: cover;
+  width: 400px;
+  height: auto;
+  position: absolute;
+  color: aliceblue;
+  mix-blend-mode: overlay;
+}
+.blue {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+}
+.red {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+}
+@media (max-width: 600px) {
+  .imagebox {
+    display: none;
+  }
+}
+@media (min-width: 601px) and (max-width: 9999px) {
+  .sm {
+    display: none;
+  }
+  .result {
+      left: 50%;
+  }
+}
 </style>

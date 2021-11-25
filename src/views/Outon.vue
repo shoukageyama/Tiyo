@@ -1,12 +1,13 @@
 <template>
   <div id="outon">
     <div class="result">
-      {{ totalhuman }}部隊
+      {{ totalhuman }}個
       <button class="resetbtn" @click="resethuman()">リセット</button>
     </div>
     <!-- 表示画像 -->
     <!-- ここからsvg -->
     <div class="imagebox">
+      <img id="bg_img" src="@/assets/image/img/outon.jpeg" alt="Outonimg">
       <svg id="kz" width="933" height="740" viewBox="0 0 933 740" fill="none" xmlns="http://www.w3.org/2000/svg">
         <g id="Frame 1">
         <g id="kazan">
@@ -80,9 +81,35 @@
 <!-- ここまでsvg -->
       <img id="bg_img" src="@/assets/image/img/outon.jpeg" alt="Outonimg">
     </div>
-    <!-- ここまで画像 -->
+    <div class="sm">
+      <div class="gold">
+        <li>洛陽<br><img @click="show(8)" src="../assets/image/img/outon/gold/rakuyou.jpeg" alt=""></li>
+        </div>
+      <div class="blue">
+        <li>漢中<br><img @click="show(1)" src="../assets/image/img/outon/blue/kantyuu.jpeg" alt=""></li>
+        <li>函谷関<br><img @click="show(5)" src="../assets/image/img/outon/blue/kankokukan.jpeg" alt=""></li>
+        <li>汜水関<br><img @click="show(6)" src="../assets/image/img/outon/blue/shisuikan.jpeg" alt=""></li>
+        <li>虎牢関<br><img @click="show(9)" src="../assets/image/img/outon/blue/koroukan.jpeg" alt=""></li>
+        <li>武関<br><img @click="show(12)" src="../assets/image/img/outon/blue/bukan.jpeg" alt=""></li>
+        <li>上庸<br><img @click="show(17)" src="../assets/image/img/outon/blue/zyouyou.jpeg" alt=""></li>
+      </div>
+      <div class="red">
+        <li>華山<br><img @click="show(0)" src="../assets/image/img/outon/red/kazan.jpeg" alt=""></li>
+        <li>河東<br><img @click="show(2)" src="../assets/image/img/outon/red/katou.jpeg" alt=""></li>
+        <li>潼関<br><img @click="show(3)" src="../assets/image/img/outon/red/doukan.jpeg" alt=""></li>
+        <li>河内<br><img @click="show(4)" src="../assets/image/img/outon/red/kadai.jpeg" alt=""></li>
+        <li>嵩山<br><img @click="show(7)" src="../assets/image/img/outon/red/suuzan.jpeg" alt=""></li>
+        <li>魯陽<br><img @click="show(10)" src="../assets/image/img/outon/red/royou.jpeg" alt=""></li>
+        <li>樊城<br><img @click="show(11)" src="../assets/image/img/outon/red/hanzyou.jpeg" alt=""></li>
+        <li>宛城<br><img @click="show(13)" src="../assets/image/img/outon/red/enzyou.jpeg" alt=""></li>
+        <li>弘農<br><img @click="show(14)" src="../assets/image/img/outon/red/kounou.jpeg" alt=""></li>
+        <li>ケイ陽<br><img @click="show(15)" src="../assets/image/img/outon/red/keiyou.jpeg" alt=""></li>
+        <li>西城<br><img @click="show(16)" src="../assets/image/img/outon/red/seizyou.jpeg" alt=""></li>
+      </div>
+    </div>
+
     <modal name="hello-world" :draggable="false" :resizable="true" :clickToClose="false" :adaptive="true" :pivotX=0.1 :pivotY=0.1>
-      <div class="modal-heder">{{ num.name }}</div>
+      <div class="modal-heder">{{ num.name }}| {{ num.human }}個</div>
       <div class="modal-body">
         <input type="text" v-model.number="input1">分<input type="text" v-model.number="input2">秒 駐屯数:<input type="text" v-model.number="input3">
         <button class="btn" @click="hide()">駐屯</button>
@@ -126,7 +153,7 @@ export default {
   },
   computed:{
     multi() {
-      return (this.input1 * this.minutes + this.input2) / this.second * this.input3
+      return (Math.round(Math.round((this.input1 * this.minutes + this.input2) / this.second * this.input3) / 2) * 2)
     },
     totalhuman() {
       let total = 0
@@ -158,6 +185,7 @@ export default {
 <style>
 
 .imagebox {
+  /* display: none; */
   width: 100vw;
   height: 100vh;
   position: relative;
@@ -165,31 +193,28 @@ export default {
 #kz {
   width: auto;
   min-height: 100%;
-  position: relative;
+  position: absolute;
   z-index: 100;
-  mix-blend-mode: overlay; 
+  top: 0;
+  left: 0;
 }
 #bg_img {
   width: auto;
   min-height: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
+  position: relative;
+  z-index: 1;
 }
 .result {
-  position: absolute;
+  /* position: absolute; */
   text-align: center;
   width: auto;
-  top: 6%;
-  left: 55%;
   z-index: 10000;
   background-color: aliceblue;
 }
 .resetbtn {
   border: outset;
-  z-index: 100;
+  z-index: 1000;
 }
-
 .modal-heder {
   width: 100%;
   top: 50%;
@@ -213,5 +238,38 @@ input {
 .btn {
   border: outset;
 }
-
+.sm {
+  background-image: url(../assets/image/img/IMG_1858.png);
+  background-size: cover;
+  width: 400px;
+  height: auto;
+  position: absolute;
+  color: aliceblue;
+  mix-blend-mode: overlay;
+}
+.blue {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+}
+.red {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+}
+@media (max-width: 600px) {
+  .imagebox {
+    display: none;
+  }
+}
+@media (min-width: 601px) and (max-width: 9999px) {
+  .sm {
+    display: none;
+  }
+  .result {
+      left: 50%;
+  }
+}
 </style>
