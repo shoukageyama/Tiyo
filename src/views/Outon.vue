@@ -79,7 +79,6 @@
         </g>
       </svg>
 <!-- ここまでsvg -->
-      <img id="bg_img" src="@/assets/image/img/outon.jpeg" alt="Outonimg">
     </div>
     <div class="sm">
       <div class="gold">
