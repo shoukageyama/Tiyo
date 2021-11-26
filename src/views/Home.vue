@@ -33,12 +33,18 @@ export default {
   width: auto;
   position: absolute;
   top: 10%;
-  left: 20%;
-  font-size: 30px;
+  left: 30%;
+  font-size: 60px;
   border: solid 2px;
   background-color: azure;
 }
 .bg_img {
   width: 100vw;
+}
+@media (max-width: 500px) {
+  .ta {
+    left: 20%;
+    font-size: 25px;
+  }
 }
 </style>

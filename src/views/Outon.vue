@@ -1,7 +1,7 @@
 <template>
   <div id="outon">
     <div class="result">
-      {{ totalhuman }}個
+        総駐屯数 {{ totalteam }} 部隊 | 必要おにぎり数 {{ totalhuman }} |個
       <button class="resetbtn" @click="resethuman()">リセット</button>
     </div>
     <!-- 表示画像 -->
@@ -81,18 +81,18 @@
 <!-- ここまでsvg -->
     </div>
     <div class="sm">
-      <div class="gold">
+      <ul class="gold">
         <li>洛陽<br><img @click="show(8)" src="../assets/image/img/outon/gold/rakuyou.jpeg" alt=""></li>
-        </div>
-      <div class="blue">
+        </ul>
+      <ul class="blue">
         <li>漢中<br><img @click="show(1)" src="../assets/image/img/outon/blue/kantyuu.jpeg" alt=""></li>
         <li>函谷関<br><img @click="show(5)" src="../assets/image/img/outon/blue/kankokukan.jpeg" alt=""></li>
         <li>汜水関<br><img @click="show(6)" src="../assets/image/img/outon/blue/shisuikan.jpeg" alt=""></li>
         <li>虎牢関<br><img @click="show(9)" src="../assets/image/img/outon/blue/koroukan.jpeg" alt=""></li>
         <li>武関<br><img @click="show(12)" src="../assets/image/img/outon/blue/bukan.jpeg" alt=""></li>
         <li>上庸<br><img @click="show(17)" src="../assets/image/img/outon/blue/zyouyou.jpeg" alt=""></li>
-      </div>
-      <div class="red">
+      </ul>
+      <ul class="red">
         <li>華山<br><img @click="show(0)" src="../assets/image/img/outon/red/kazan.jpeg" alt=""></li>
         <li>河東<br><img @click="show(2)" src="../assets/image/img/outon/red/katou.jpeg" alt=""></li>
         <li>潼関<br><img @click="show(3)" src="../assets/image/img/outon/red/doukan.jpeg" alt=""></li>
@@ -104,11 +104,11 @@
         <li>弘農<br><img @click="show(14)" src="../assets/image/img/outon/red/kounou.jpeg" alt=""></li>
         <li>ケイ陽<br><img @click="show(15)" src="../assets/image/img/outon/red/keiyou.jpeg" alt=""></li>
         <li>西城<br><img @click="show(16)" src="../assets/image/img/outon/red/seizyou.jpeg" alt=""></li>
-      </div>
+      </ul>
     </div>
 
     <modal name="hello-world" :draggable="false" :resizable="true" :clickToClose="false" :adaptive="true" :pivotX=0.1 :pivotY=0.1>
-      <div class="modal-heder">{{ num.name }}| {{ num.human }}個</div>
+      <div class="modal-heder">{{ num.name }}| {{ num.team }}部隊| {{ num.human }}個</div>
       <div class="modal-body">
         <input type="text" v-model.number="input1">分<input type="text" v-model.number="input2">秒 駐屯数:<input type="text" v-model.number="input3">
         <button class="btn" @click="hide()">駐屯</button>
@@ -129,30 +129,41 @@ export default {
     minutes:60,
     num: '',
     outonData: [
-      { id: 1, name:"華山", human:0},
-      { id: 2, name:"漢中", human:0},
-      { id: 3, name:"河東", human:0},
-      { id: 4, name:"潼関", human:0},
-      { id: 5, name:"河内", human:0},
-      { id: 6, name:"函谷関", human:0},
-      { id: 7, name:"汜水関", human:0},
-      { id: 8, name:"嵩山", human:0},
-      { id: 9, name:"洛陽", human:0},
-      { id: 10, name:"虎牢関", human:0},
-      { id: 11, name:"魯陽", human:0},
-      { id: 12, name:"樊城", human:0},
-      { id: 13, name:"武関", human:0},
-      { id: 14, name:"宛城", human:0},
-      { id: 15, name:"弘農", human:0},
-      { id: 16, name:"ケイ陽", human:0},
-      { id: 17, name:"西城", human:0},
-      { id: 18, name:"上庸", human:0},
+      { id: 1, name:"華山", human:0, team:0},
+      { id: 2, name:"漢中", human:0, team:0},
+      { id: 3, name:"河東", human:0, team:0},
+      { id: 4, name:"潼関", human:0, team:0},
+      { id: 5, name:"河内", human:0, team:0},
+      { id: 6, name:"函谷関", human:0, team:0},
+      { id: 7, name:"汜水関", human:0, team:0},
+      { id: 8, name:"嵩山", human:0, team:0},
+      { id: 9, name:"洛陽", human:0, team:0},
+      { id: 10, name:"虎牢関", human:0, team:0},
+      { id: 11, name:"魯陽", human:0, team:0},
+      { id: 12, name:"樊城", human:0, team:0},
+      { id: 13, name:"武関", human:0, team:0},
+      { id: 14, name:"宛城", human:0, team:0},
+      { id: 15, name:"弘農", human:0, team:0},
+      { id: 16, name:"ケイ陽", human:0, team:0},
+      { id: 17, name:"西城", human:0, team:0},
+      { id: 18, name:"上庸", human:0, team:0},
     ]
     }
   },
   computed:{
     multi() {
-  return (Math.round(Math.round((this.input1 * this.minutes + this.input2) / this.second) / 2) * 2 * this.input3 - this.input3)
+  return (Math.round(Math.round((this.input1 * this.minutes + this.input2) / this.second) / 2) * 2 * this.input3)
+    },
+    multi2() {
+      return (Math.round(Math.round((this.input1 * this.minutes + this.input2) / this.second) / 2) * 2)
+    },
+    totalteam() {
+      let total = 0
+      const length = this.outonData.length
+      for(let i = 0; i < length; i++) {
+        total += this.outonData[i].team
+      }
+      return total
     },
     totalhuman() {
       let total = 0
@@ -160,7 +171,7 @@ export default {
       for(let i = 0; i < length; i++) {
         total += this.outonData[i].human
       }
-      return Math.round(total) 
+      return total
     }
   },
   methods: {

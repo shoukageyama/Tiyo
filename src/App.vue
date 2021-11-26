@@ -7,6 +7,7 @@
       <router-link to="/outon">王都圏</router-link> |
       <router-link to="/ryoueki">涼益州</router-link> |
       <router-link to="/seiyosyu">青豫州</router-link> |
+      <router-link to="/gunnyuu">群雄</router-link>
     </div>
     <router-view/>
   </div>

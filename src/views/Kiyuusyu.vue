@@ -1,7 +1,7 @@
 <template>
   <div id="kiyuusyu">
     <div class="result">
-        {{ totalhuman }}個
+        総駐屯数 {{ totalteam }} 部隊 | 必要おにぎり数 {{ totalhuman }} |個
         <button class="resetbtn" @click="resethuman()">リセット</button>
     </div>
     <!-- 表示画像 -->
@@ -111,18 +111,18 @@
 <!-- ここまでsvg -->
     </div>
     <div class="sm">
-      <div class="gold">
+      <ul class="gold">
         <li>上党<br><img @click="show(21)" src="../assets/image/img/kiyuusyu/gold/zyoutou.jpeg" alt=""></li>
-      </div>
-      <div class="blue">
+      </ul>
+      <ul class="blue">
         <li>襄平<br><img @click="show(0)" src="../assets/image/img/kiyuusyu/blue/zyouhei.jpeg" alt=""></li>
         <li>代郡<br><img @click="show(6)" src="../assets/image/img/kiyuusyu/blue/daigun.jpeg" alt=""></li>
         <li>平原<br><img @click="show(9)" src="../assets/image/img/kiyuusyu/blue/heigen.jpeg" alt=""></li>
         <li>官渡<br><img @click="show(13)" src="../assets/image/img/kiyuusyu/blue/kanto.jpeg" alt=""></li>
         <li>ギョウ城<br><img @click="show(18)" src="../assets/image/img/kiyuusyu/blue/gyouzyou.jpeg" alt=""></li>
         <li>巨鹿<br><img @click="show(23)" src="../assets/image/img/kiyuusyu/blue/kyoroku.jpeg" alt=""></li>
-      </div>
-      <div class="red">
+      </ul>
+      <ul class="red">
         <li>楽浪<br><img @click="show(1)" src="../assets/image/img/kiyuusyu/red/rakurou.jpeg" alt=""></li>
         <li>遼東<br><img @click="show(2)" src="../assets/image/img/kiyuusyu/red/ryoutou.jpeg" alt=""></li>
         <li>薊城<br><img @click="show(3)" src="../assets/image/img/kiyuusyu/red/keizyou.jpeg" alt=""></li>
@@ -140,11 +140,11 @@
         <li>九原<br><img @click="show(19)" src="../assets/image/img/kiyuusyu/red/kyuugen.jpeg" alt=""></li>
         <li>晋陽<br><img @click="show(20)" src="../assets/image/img/kiyuusyu/red/shinyou.jpeg" alt=""></li>
         <li>壷関<br><img @click="show(22)" src="../assets/image/img/kiyuusyu/red/kokan.jpeg" alt=""></li>
-      </div> 
+      </ul> 
     </div>
     <!-- ここまで画像 -->
     <modal name="hello-world" :draggable="false" :resizable="true" :clickToClose="false" :adaptive="true" :pivotX=0.1 :pivotY=0.1>
-      <div class="modal-heder">{{ num.name }}| {{ num.human }}個</div>
+      <div class="modal-heder">{{ num.name }}| {{ num.team }}部隊| {{ num.human }}個</div>
       <div class="modal-body">
         <input type="text" v-model.number="input1">分<input type="text" v-model.number="input2">秒 駐屯数:<input type="text" v-model.number="input3">
         <button class="btn" @click="hide()">駐屯</button>
@@ -165,36 +165,47 @@ export default {
     minutes:60,
     num: '',
     kiyuusyuData: [
-      { id: 1, name:"襄平", human:0},
-      { id: 2, name:"楽浪", human:0},
-      { id: 3, name:"遼東", human:0},
-      { id: 4, name:"薊城", human:0},
-      { id: 5, name:"青丘", human:0},
-      { id: 6, name:"北海", human:0},
-      { id: 7, name:"代郡", human:0},
-      { id: 8, name:"范陽", human:0},
-      { id: 9, name:"北平", human:0},
-      { id: 10, name:"平原", human:0},
-      { id: 11, name:"臨シ", human:0},
-      { id: 12, name:"白馬", human:0},
-      { id: 13, name:"延津", human:0},
-      { id: 14, name:"官渡", human:0},
-      { id: 15, name:"南皮", human:0},
-      { id: 16, name:"界橋", human:0},
-      { id: 17, name:"清河", human:0},
-      { id: 18, name:"恒山", human:0},
-      { id: 19, name:"ギョウ城", human:0},
-      { id: 20, name:"九原", human:0},
-      { id: 21, name:"晋陽", human:0},
-      { id: 22, name:"上党", human:0},
-      { id: 23, name:"壷関", human:0},
-      { id: 24, name:"巨鹿", human:0},
+      { id: 1, name:"襄平", human:0, team:0},
+      { id: 2, name:"楽浪", human:0, team:0},
+      { id: 3, name:"遼東", human:0, team:0},
+      { id: 4, name:"薊城", human:0, team:0},
+      { id: 5, name:"青丘", human:0, team:0},
+      { id: 6, name:"北海", human:0, team:0},
+      { id: 7, name:"代郡", human:0, team:0},
+      { id: 8, name:"范陽", human:0, team:0},
+      { id: 9, name:"北平", human:0, team:0},
+      { id: 10, name:"平原", human:0, team:0},
+      { id: 11, name:"臨シ", human:0, team:0},
+      { id: 12, name:"白馬", human:0, team:0},
+      { id: 13, name:"延津", human:0, team:0},
+      { id: 14, name:"官渡", human:0, team:0},
+      { id: 15, name:"南皮", human:0, team:0},
+      { id: 16, name:"界橋", human:0, team:0},
+      { id: 17, name:"清河", human:0, team:0},
+      { id: 18, name:"恒山", human:0, team:0},
+      { id: 19, name:"ギョウ城", human:0, team:0},
+      { id: 20, name:"九原", human:0, team:0},
+      { id: 21, name:"晋陽", human:0, team:0},
+      { id: 22, name:"上党", human:0, team:0},
+      { id: 23, name:"壷関", human:0, team:0},
+      { id: 24, name:"巨鹿", human:0, team:0},
     ]
     }
   },
   computed:{
     multi() {
-  return (Math.round(Math.round((this.input1 * this.minutes + this.input2) / this.second) / 2) * 2 * this.input3 - this.input3)
+  return (Math.round(Math.round((this.input1 * this.minutes + this.input2) / this.second) / 2) * 2 * this.input3)
+    },
+    multi2() {
+      return (Math.round(Math.round((this.input1 * this.minutes + this.input2) / this.second) / 2) * 2)
+    },
+    totalteam() {
+      let total = 0
+      const length = this.kiyuusyuData.length
+      for(let i = 0; i < length; i++) {
+        total += this.kiyuusyuData[i].team
+      }
+      return total
     },
     totalhuman() {
       let total = 0
@@ -202,7 +213,7 @@ export default {
       for(let i = 0; i < length; i++) {
         total += this.kiyuusyuData[i].human
       }
-      return Math.round(total) 
+      return total 
     }
   },
   methods: {

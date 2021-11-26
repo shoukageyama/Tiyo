@@ -1,7 +1,7 @@
 <template>
   <div id="seiyosyu">
     <div class="result">
-      {{ totalhuman }}個
+        総駐屯数 {{ totalteam }} 部隊 | 必要おにぎり数 {{ totalhuman }} |個
       <button class="resetbtn" @click="resethuman()">リセット</button>
     </div>
     <!-- 表示画像 -->
@@ -92,17 +92,17 @@
       
     </div>
     <div class="sm">
-      <div class="gold">
+      <ul class="gold">
         <li>許昌<br><img @click="show(7)" src="../assets/image/img/seiyosyu/gold/kyoshou.jpeg" alt=""></li>
-      </div>
-      <div class="blue">
+      </ul>
+      <ul class="blue">
         <li>下ヒ<br><img @click="show(2)" src="../assets/image/img/seiyosyu/blue/kahi.jpeg" alt=""></li>
         <li>濮陽<br><img @click="show(5)" src="../assets/image/img/seiyosyu/blue/bokuyou.jpeg" alt=""></li>
         <li>ショウ県<br><img @click="show(10)" src="../assets/image/img/seiyosyu/blue/shouken.jpeg" alt=""></li>
         <li>寿春<br><img @click="show(11)" src="../assets/image/img/seiyosyu/blue/zyusyun.jpeg" alt=""></li>
         <li>穎川<br><img @click="show(16)" src="../assets/image/img/seiyosyu/blue/eisen.jpeg" alt=""></li>
-      </div>
-      <div class="red">
+      </ul>
+      <ul class="red">
       <li>蓬莱<br><img @click="show(0)" src="../assets/image/img/seiyosyu/red/hourai.jpeg" alt=""></li>
       <li>琅ヤ<br><img @click="show(1)" src="../assets/image/img/seiyosyu/red/rouya.jpeg" alt=""></li>
       <li>泰山<br><img @click="show(3)" src="../assets/image/img/seiyosyu/red/taizan.jpeg" alt=""></li>
@@ -116,11 +116,11 @@
       <li>盧江<br><img @click="show(15)" src="../assets/image/img/seiyosyu/red/rokou.jpeg" alt=""></li>
       <li>石亭<br><img @click="show(17)" src="../assets/image/img/seiyosyu/red/sekitei.jpeg" alt=""></li>
       <li>合肥<br><img @click="show(18)" src="../assets/image/img/seiyosyu/red/gouhi.jpeg" alt=""></li>
-      </div>
+      </ul>
     </div>
     <!-- ここまで画像 -->
     <modal name="hello-world" :draggable="false" :resizable="true" :clickToClose="false" :adaptive="true" :pivotX=0.1 :pivotY=0.1>
-      <div class="modal-heder">{{ num.name }}| {{ num.human }}個</div>
+      <div class="modal-heder">{{ num.name }}| {{ num.team }}部隊| {{ num.human }}個</div>
       <div class="modal-body">
         <input type="text" v-model.number="input1">分<input type="text" v-model.number="input2">秒 駐屯数:<input type="text" v-model.number="input3">
         <button class="btn" @click="hide()">駐屯</button>
@@ -141,31 +141,42 @@ export default {
     minutes:60,
     num: '',
     seiyosyoData: [
-      { id: 1, name:"蓬莱", human:0},
-      { id: 2, name:"琅ヤ", human:0},
-      { id: 3, name:"下ヒ", human:0},
-      { id: 4, name:"泰山", human:0},
-      { id: 5, name:"小沛", human:0},
-      { id: 6, name:"濮陽", human:0},
-      { id: 7, name:"彭城", human:0},
-      { id: 8, name:"許昌", human:0},
-      { id: 9, name:"陳留", human:0},
-      { id: 10, name:"汝南", human:0},
-      { id: 11, name:"ショウ県", human:0},
-      { id: 12, name:"寿春", human:0},
-      { id: 13, name:"淮陰", human:0},
-      { id: 14, name:"広陵", human:0},
-      { id: 15, name:"濡須口", human:0},
-      { id: 16, name:"盧江", human:0},
-      { id: 17, name:"穎川", human:0},
-      { id: 18, name:"石亭", human:0},
-      { id: 19, name:"合肥", human:0},
+      { id: 1, name:"蓬莱", human:0, team:0},
+      { id: 2, name:"琅ヤ", human:0, team:0},
+      { id: 3, name:"下ヒ", human:0, team:0},
+      { id: 4, name:"泰山", human:0, team:0},
+      { id: 5, name:"小沛", human:0, team:0},
+      { id: 6, name:"濮陽", human:0, team:0},
+      { id: 7, name:"彭城", human:0, team:0},
+      { id: 8, name:"許昌", human:0, team:0},
+      { id: 9, name:"陳留", human:0, team:0},
+      { id: 10, name:"汝南", human:0, team:0},
+      { id: 11, name:"ショウ県", human:0, team:0},
+      { id: 12, name:"寿春", human:0, team:0},
+      { id: 13, name:"淮陰", human:0, team:0},
+      { id: 14, name:"広陵", human:0, team:0},
+      { id: 15, name:"濡須口", human:0, team:0},
+      { id: 16, name:"盧江", human:0, team:0},
+      { id: 17, name:"穎川", human:0, team:0},
+      { id: 18, name:"石亭", human:0, team:0},
+      { id: 19, name:"合肥", human:0, team:0},
     ]
     }
   },
   computed:{
     multi() {
-  return (Math.round(Math.round((this.input1 * this.minutes + this.input2) / this.second) / 2) * 2 * this.input3 - this.input3)
+  return (Math.round(Math.round((this.input1 * this.minutes + this.input2) / this.second) / 2) * 2 * this.input3)
+    },
+    multi2() {
+      return (Math.round(Math.round((this.input1 * this.minutes + this.input2) / this.second) / 2) * 2)
+    },
+    totalteam() {
+      let total = 0
+      const length = this.seiyosyoData.length
+      for(let i = 0; i < length; i++) {
+        total += this.seiyosyoData[i].team
+      }
+      return total
     },
     totalhuman() {
       let total = 0
@@ -173,7 +184,7 @@ export default {
       for(let i = 0; i < length; i++) {
         total += this.seiyosyoData[i].human
       }
-      return Math.round(total) 
+      return total
     }
   },
   methods: {

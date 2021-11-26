@@ -35,6 +35,11 @@ const routes = [
     name: 'Seiyosyu',
     component: () => import('../views/Seiyosyu.vue')
   },
+  {
+    path: '/gunnyuu',
+    name: 'Gunnyuu',
+    component: () => import('../views/Gunnyuu.vue')
+  },
 ]
 
 const router = new VueRouter({

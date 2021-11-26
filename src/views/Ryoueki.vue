@@ -1,7 +1,7 @@
 <template>
   <div id="ryoueki">
     <div class="result">
-      {{ totalhuman }}個
+        総駐屯数 {{ totalteam }} 部隊 | 必要おにぎり数 {{ totalhuman }} |個
       <button class="resetbtn" @click="resethuman()">リセット</button>
     </div>
     <!-- 表示画像 -->
@@ -103,16 +103,16 @@
 <!-- ここまでsvg -->
     </div>
     <div class="sm">
-      <div class="gold">
+      <ul class="gold">
         <li>長安<br><img @click="show(5)" src="../assets/image/img/ryoueki/gold/tyouan.jpeg" alt=""></li>
-      </div>
-      <div class="blue">
+      </ul>
+      <ul class="blue">
         <li>陳倉<br><img @click="show(4)" src="../assets/image/img/ryoueki/blue/tinsou.jpeg" alt=""></li>
         <li>剣閣<br><img @click="show(11)" src="../assets/image/img/ryoueki/blue/kenkaku.jpeg" alt=""></li>
         <li>フ陵<br><img @click="show(13)" src="../assets/image/img/ryoueki/blue/huryou.jpeg" alt=""></li>
         <li>成都<br><img @click="show(15)" src="../assets/image/img/ryoueki/blue/seito.jpeg" alt=""></li>
-      </div>
-      <div class="red">
+      </ul>
+      <ul class="red">
         <li>武威<br><img @click="show(0)" src="../assets/image/img/ryoueki/red/bui.jpeg" alt=""></li>
         <li>五丈原<br><img @click="show(1)" src="../assets/image/img/ryoueki/red/gozyougen.jpeg" alt=""></li>
         <li>扶風<br><img @click="show(2)" src="../assets/image/img/ryoueki/red/huhuu.jpeg" alt=""></li>
@@ -130,11 +130,11 @@
         <li>興古<br><img @click="show(19)" src="../assets/image/img/ryoueki/red/kouko.jpeg" alt=""></li>
         <li>永昌<br><img @click="show(20)" src="../assets/image/img/ryoueki/red/eishou.jpeg" alt=""></li>
         <li>雲南<br><img @click="show(21)" src="../assets/image/img/ryoueki/red/unnan.jpeg" alt=""></li>
-      </div>
+      </ul>
     </div>
     <!-- ここまで画像 -->
     <modal name="hello-world" :draggable="false" :resizable="true" :clickToClose="false" :adaptive="true" :pivotX=0.1 :pivotY=0.1>
-      <div class="modal-heder">{{ num.name }}| {{ num.human }}個</div>
+      <div class="modal-heder">{{ num.name }}| {{ num.team }}部隊| {{ num.human }}個</div>
       <div class="modal-body">
         <input type="text" v-model.number="input1">分<input type="text" v-model.number="input2">秒 駐屯数:<input type="text" v-model.number="input3">
         <button class="btn" @click="hide()">駐屯</button>
@@ -155,34 +155,45 @@ export default {
     minutes:60,
     num: '',
     RyouekiData: [
-      { id: 1, name:"武威", human:0},
-      { id: 2, name:"五丈原", human:0},
-      { id: 3, name:"扶風", human:0},
-      { id: 4, name:"安定", human:0},
-      { id: 5, name:"陳倉", human:0},
-      { id: 6, name:"長安", human:0},
-      { id: 7, name:"西平", human:0},
-      { id: 8, name:"街亭", human:0},
-      { id: 9, name:"天水", human:0},
-      { id: 10, name:"武都", human:0},
-      { id: 11, name:"岐山", human:0},
-      { id: 12, name:"剣閣", human:0},
-      { id: 13, name:"綿竹関", human:0},
-      { id: 14, name:"フ陵", human:0},
-      { id: 15, name:"梓潼", human:0},
-      { id: 16, name:"成都", human:0},
-      { id: 17, name:"漢嘉", human:0},
-      { id: 18, name:"建寧", human:0},
-      { id: 19, name:"江州", human:0},
-      { id: 20, name:"興古", human:0},
-      { id: 21, name:"永昌", human:0},
-      { id: 22, name:"雲南", human:0},
+      { id: 1, name:"武威", human:0, team:0},
+      { id: 2, name:"五丈原", human:0, team:0},
+      { id: 3, name:"扶風", human:0, team:0},
+      { id: 4, name:"安定", human:0, team:0},
+      { id: 5, name:"陳倉", human:0, team:0},
+      { id: 6, name:"長安", human:0, team:0},
+      { id: 7, name:"西平", human:0, team:0},
+      { id: 8, name:"街亭", human:0, team:0},
+      { id: 9, name:"天水", human:0, team:0},
+      { id: 10, name:"武都", human:0, team:0},
+      { id: 11, name:"岐山", human:0, team:0},
+      { id: 12, name:"剣閣", human:0, team:0},
+      { id: 13, name:"綿竹関", human:0, team:0},
+      { id: 14, name:"フ陵", human:0, team:0},
+      { id: 15, name:"梓潼", human:0, team:0},
+      { id: 16, name:"成都", human:0, team:0},
+      { id: 17, name:"漢嘉", human:0, team:0},
+      { id: 18, name:"建寧", human:0, team:0},
+      { id: 19, name:"江州", human:0, team:0},
+      { id: 20, name:"興古", human:0, team:0},
+      { id: 21, name:"永昌", human:0, team:0},
+      { id: 22, name:"雲南", human:0, team:0},
     ]
     }
   },
   computed:{
     multi() {
-  return (Math.round(Math.round((this.input1 * this.minutes + this.input2) / this.second) / 2) * 2 * this.input3 - this.input3)
+  return (Math.round(Math.round((this.input1 * this.minutes + this.input2) / this.second) / 2) * 2 * this.input3)
+    },
+    multi2() {
+      return (Math.round(Math.round((this.input1 * this.minutes + this.input2) / this.second) / 2) * 2)
+    },
+    totalteam() {
+      let total = 0
+      const length = this.RyouekiData.length
+      for(let i = 0; i < length; i++) {
+        total += this.RyouekiData[i].team
+      }
+      return total
     },
     totalhuman() {
       let total = 0
@@ -190,7 +201,7 @@ export default {
       for(let i = 0; i < length; i++) {
         total += this.RyouekiData[i].human
       }
-      return Math.round(total) 
+      return total
     }
   },
   methods: {

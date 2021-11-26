@@ -1,7 +1,7 @@
 <template>
   <div id="keiyou">
       <div class="result">
-        {{ totalhuman }} 個
+        総駐屯数 {{ totalteam }} 部隊 | 必要おにぎり数 {{ totalhuman }} |個
         <button class="resetbtn" @click="resethuman()">リセット</button>
       </div>
     <!-- 表示画像 -->
@@ -108,17 +108,17 @@
     
     </div>
     <div class="sm">
-      <div class="gold">
+      <ul class="gold">
       <li>襄陽<br><img @click="show(7)" src="../assets/image/img/keiyou/gold/zyouyou.jpeg" alt=""></li>
-      </div>
-      <div class="blue">
+      </ul>
+      <ul class="blue">
       <li>江陵<br><img @click="show(6)" src="../assets/image/img/keiyou/blue/kouryou.jpeg" alt=""></li>
       <li>長沙<br><img @click="show(10)" src="../assets/image/img/keiyou/blue/tyousa.jpeg" alt=""></li>
       <li>江夏<br><img @click="show(13)" src="../assets/image/img/keiyou/blue/kouka.jpeg" alt=""></li>
       <li>建業<br><img @click="show(15)" src="../assets/image/img/keiyou/blue/kengyou.jpeg" alt=""></li>
       <li>建安<br><img @click="show(18)" src="../assets/image/img/keiyou/blue/kenan.jpeg" alt=""></li>
-      </div>
-      <div class="red">
+      </ul>
+      <ul class="red">
       <li>交趾<br><img @click="show(0)" src="../assets/image/img/keiyou/red/koushi.jpeg" alt=""></li>
       <li>夷陵<br><img @click="show(1)" src="../assets/image/img/keiyou/red/iryou.jpeg" alt=""></li>
       <li>永安<br><img @click="show(2)" src="../assets/image/img/keiyou/red/eian.jpeg" alt=""></li>
@@ -136,11 +136,11 @@
       <li>呉郡<br><img @click="show(20)" src="../assets/image/img/keiyou/red/gogun.jpeg" alt=""></li>
       <li>会稽<br><img @click="show(21)" src="../assets/image/img/keiyou/red/kaikei.jpeg" alt=""></li>
       <li>臨海<br><img @click="show(22)" src="../assets/image/img/keiyou/red/rinkai.jpeg" alt=""></li>
-      </div> 
+      </ul> 
     </div>
     <!-- ここまで画像 -->
     <modal name="hello-world" :draggable="false" :resizable="true" :clickToClose="false" :adaptive="true">
-      <div class="modal-heder">{{ num.name }}| {{ num.human }}個</div>
+      <div class="modal-heder">{{ num.name }}| {{ num.team }}部隊| {{ num.human }}個</div>
       <div class="modal-body">
         <input type="text" v-model.number="input1">分<input type="text" v-model.number="input2">秒 駐屯数:<input type="text" v-model.number="input3">
         <button class="btn" @click="hide()">駐屯</button>
@@ -161,35 +161,46 @@ export default {
     minutes:60,
     num: '',
     keiyouData: [
-      { id: 1, name:"交趾", human:0},
-      { id: 2, name:"夷陵", human:0},
-      { id: 3, name:"永安", human:0},
-      { id: 4, name:"麦城", human:0},
-      { id: 5, name:"武陵", human:0},
-      { id: 6, name:"零陵", human:0},
-      { id: 7, name:"江陵", human:0},
-      { id: 8, name:"襄陽", human:0},
-      { id: 9, name:"桂陽", human:0},
-      { id: 10, name:"衡陽", human:0},
-      { id: 11, name:"長沙", human:0},
-      { id: 12, name:"新野", human:0},
-      { id: 13, name:"華容", human:0},
-      { id: 14, name:"江夏", human:0},
-      { id: 15, name:"豫章", human:0},
-      { id: 16, name:"建業", human:0},
-      { id: 17, name:"紫桑", human:0},
-      { id: 18, name:"蒼梧", human:0},
-      { id: 19, name:"建安", human:0},
-      { id: 20, name:"曲阿", human:0},
-      { id: 21, name:"呉郡", human:0},
-      { id: 22, name:"会稽", human:0},
-      { id: 23, name:"臨海", human:0},
-    ]
+      { id: 1, name:"交趾", human:0, team:0},
+      { id: 2, name:"夷陵", human:0, team:0},
+      { id: 3, name:"永安", human:0, team:0},
+      { id: 4, name:"麦城", human:0, team:0},
+      { id: 5, name:"武陵", human:0, team:0},
+      { id: 6, name:"零陵", human:0, team:0},
+      { id: 7, name:"江陵", human:0, team:0},
+      { id: 8, name:"襄陽", human:0, team:0},
+      { id: 9, name:"桂陽", human:0, team:0},
+      { id: 10, name:"衡陽", human:0, team:0},
+      { id: 11, name:"長沙", human:0, team:0},
+      { id: 12, name:"新野", human:0, team:0},
+      { id: 13, name:"華容", human:0, team:0},
+      { id: 14, name:"江夏", human:0, team:0},
+      { id: 15, name:"豫章", human:0, team:0},
+      { id: 16, name:"建業", human:0, team:0},
+      { id: 17, name:"紫桑", human:0, team:0},
+      { id: 18, name:"蒼梧", human:0, team:0},
+      { id: 19, name:"建安", human:0, team:0},
+      { id: 20, name:"曲阿", human:0, team:0},
+      { id: 21, name:"呉郡", human:0, team:0},
+      { id: 22, name:"会稽", human:0, team:0},
+      { id: 23, name:"臨海", human:0, team:0},
+    ], team:0
     }
   },
   computed:{
     multi() {
-      return (Math.round(Math.round((this.input1 * this.minutes + this.input2) / this.second) / 2) * 2 * this.input3 - this.input3)
+      return (Math.round(Math.round((this.input1 * this.minutes + this.input2) / this.second) / 2) * 2 * this.input3)
+    },
+    multi2() {
+      return (Math.round(Math.round((this.input1 * this.minutes + this.input2) / this.second) / 2) * 2)
+    },
+    totalteam() {
+      let total = 0
+      const length = this.keiyouData.length
+      for(let i = 0; i < length; i++) {
+        total += this.keiyouData[i].team
+      }
+      return total 
     },
     totalhuman() {
       let total = 0
@@ -197,7 +208,7 @@ export default {
       for(let i = 0; i < length; i++) {
         total += this.keiyouData[i].human
       }
-      return Math.round(total) 
+      return total
     },
   },
   methods: {
@@ -207,6 +218,7 @@ export default {
     },
     hide() {
       this.num.human = this.multi
+      this.num.team = this.multi2
       this.$modal.hide('hello-world');
     },
     resethuman() {
