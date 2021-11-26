@@ -102,7 +102,7 @@
       </svg>
 <!-- ここまでsvg -->
     </div>
-        <div class="sm">
+    <div class="sm">
       <div class="gold">
         <li>長安<br><img @click="show(5)" src="../assets/image/img/ryoueki/gold/tyouan.jpeg" alt=""></li>
       </div>
@@ -182,7 +182,7 @@ export default {
   },
   computed:{
     multi() {
-      return (Math.round(Math.round((this.input1 * this.minutes + this.input2) / this.second * this.input3) / 2) * 2)
+  return (Math.round(Math.round((this.input1 * this.minutes + this.input2) / this.second) / 2) * 2 * this.input3 - this.input3)
     },
     totalhuman() {
       let total = 0
@@ -274,7 +274,6 @@ input {
   height: auto;
   position: absolute;
   color: aliceblue;
-  mix-blend-mode: overlay;
 }
 .blue {
   display: flex;
