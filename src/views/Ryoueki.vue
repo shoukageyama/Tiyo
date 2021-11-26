@@ -211,6 +211,7 @@ export default {
     },
     hide() {
       this.num.human = this.multi
+      this.num.team = this.multi2
       this.$modal.hide('hello-world');
     },
     resethuman() {
