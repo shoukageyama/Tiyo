@@ -123,10 +123,10 @@ export default {
   },
   computed:{
     multi() {
-  return (Math.round(Math.round((this.input1 * this.minutes + this.input2) / this.second) / 2) * 2 * this.input3)
+      return Math.round((this.input1 * this.minutes + this.input2) / this.second) * this.input3
     },
     multi2() {
-      return (Math.round(Math.round((this.input1 * this.minutes + this.input2) / this.second) / 2) * 2)
+      return Math.round((this.input1 * this.minutes + this.input2) / this.second) 
     },
     totalteam() {
       let total = 0
@@ -158,6 +158,7 @@ export default {
     resethuman() {
       this.kiyuusyuData.forEach(element => {
         element.human = 0
+        element.team = 0
       });
     }
   } 
