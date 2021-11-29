@@ -222,6 +222,9 @@ input {
   position: absolute;
   color: aliceblue;
 }
+.gold,.blue, .red {
+  list-style: none;
+}
 .blue {
   display: flex;
   flex-wrap: wrap;
